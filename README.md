@@ -57,3 +57,8 @@ cp -rp /etc/openvpn/easy-rsa/pki/{ca.crt,issued/clientserv.crt,private/clientser
 Выполняем: \
 `ansible-playbook configure-server.yml -t cserver`
 ### Сформируем конфиг из полученых сертификатов для `openvpn-client` [clientserv.conf](https://github.com/vedoff/openvpn/blob/main/roles/ovpn/files/clientserv.conf)
+Конфиг будет установлен на сервер путем копирования средствами `ansible` \
+И настроена пересылка пакетов между интерфейсами: \
+`net.ipv4.ip_forward=1 -> /etc/sysctl.conf` \
+Выполняем: \
+`ansible-playbook configure-server.yml -t cclient`
