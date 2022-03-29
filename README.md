@@ -35,8 +35,8 @@
 `openvpn --genkey secret /etc/easy-rsa/pki/ta.key` \
 Генерим сертификат отзыва: \
 `./easyrsa gen-crl` \
-Доступен по
-`/etc/easy-rsa/pki/crl.pem`
+Доступен по `/etc/easy-rsa/pki/crl.pem` \
+Копируем полученые сертификаты в места согласно конфигу openvpn
+`cp -rp /etc/openvpn/easy-rsa/pki/{ca.crt,dh.pem,ta.key,crl.pem,issued,private} /etc/openvpn/server/`
 
-
-Все сертификаты появятся в папкe `/etc/openvpn/easy-rsa/pki` и ее подпапках.
+### Все сертификаты появятся в папкe `/etc/openvpn/easy-rsa/pki` и ее подпапках.
