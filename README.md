@@ -37,6 +37,6 @@
 `./easyrsa gen-crl` \
 Доступен по `/etc/easy-rsa/pki/crl.pem` \
 Копируем полученые сертификаты в места согласно конфигу openvpn
-`cp -rp /etc/openvpn/easy-rsa/pki/{ca.crt,dh.pem,ta.key,crl.pem,issued,private} /etc/openvpn/server/`
-
+`cp -rp /etc/openvpn/easy-rsa/pki/{ca.crt,dh.pem,ta.key,crl.pem,issued,private} /etc/openvpn/server/` \
+![](https://github.com/vedoff/openvpn/blob/main/pict/Screenshot%20from%202022-03-29%2016-40-03.png)
 ### Все сертификаты появятся в папкe `/etc/openvpn/easy-rsa/pki` и ее подпапках.
