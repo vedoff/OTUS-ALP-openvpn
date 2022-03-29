@@ -28,10 +28,15 @@
 `./easyrsa gen-dh` \
 После генерации доступен: \
 `/etc/openvpn/easy-rsa/pki/dh.pem` \
-Теперь генерим серверный сертификат и ключ в процессе будет заброшен парольн а CA.key (123456): \
+Теперь генерим серверный сертификат и ключ в процессе будет запрошен пароль на CA.key (123456): \
 `./easyrsa build-server-full server nopass` \
 `nopass` - не устанавливать пароль на сертификат. \
-
+Генерим TLS/SSL - защита от DoS атак и UDPпорт флудинга \
+`openvpn --genkey secret /etc/easy-rsa/pki/ta.key` \
+Генерим сертификат отзыва: \
+`./easyrsa gen-crl` \
+Доступен по
+`/etc/easy-rsa/pki/crl.pem`
 
 
 Все сертификаты появятся в папкe `/etc/openvpn/easy-rsa/pki` и ее подпапках.
