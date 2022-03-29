@@ -1,0 +1,22 @@
+client
+tls-client
+pull
+dev tun
+proto udp4
+remote 10.10.11.1 1194
+resolv-retry infinite
+nobind
+#user nobody
+#group nogroup
+persist-key
+persist-tun
+key-direction 1
+remote-cert-tls server
+auth-nocache
+comp-lzo
+verb 3
+auth SHA512
+tls-auth ta.key 1
+ca ca.crt
+cert koromicha.crt
+key koromicha.key
