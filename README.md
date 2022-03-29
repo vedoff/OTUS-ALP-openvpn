@@ -49,4 +49,8 @@
 cp -rp /etc/openvpn/easy-rsa/pki/{ca.crt,issued/clientserv.crt,private/clientserv.key} /etc/openvpn/client/clientserv
 Создадим конфиг `openvpn-server`
 [server.conf](https://github.com/vedoff/openvpn/blob/main/roles/ovpn/files/server.conf)
-
+Конфиг будет установлен на сервер путем копирования средствами `ansible` \
+И настроена пересылка пакетов между интерфейсами: \
+`net.ipv4.ip_forward=1 -> /etc/sysctl.conf`
+Выполняем: \
+`ansible-playbook configure-server.yml`
