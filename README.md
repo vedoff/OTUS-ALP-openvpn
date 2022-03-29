@@ -7,7 +7,7 @@
 # Выполнение:
 ### Между двумя виртуалками поднять vpn в режимах tun/tap
 Поднимаем стенд: \
-`vagrant up && ansible-playbook play.yml`
+`vagrant up && ansible-playbook play.yml -t iovpn`
 ### Схема стенда
 ![](https://github.com/vedoff/openvpn/blob/main/pict/Screenshot%20from%202022-03-29%2015-18-58.png)
 
@@ -53,4 +53,4 @@ cp -rp /etc/openvpn/easy-rsa/pki/{ca.crt,issued/clientserv.crt,private/clientser
 И настроена пересылка пакетов между интерфейсами: \
 `net.ipv4.ip_forward=1 -> /etc/sysctl.conf` \
 Выполняем: \
-`ansible-playbook configure-server.yml`
+`ansible-playbook configure-server.yml -t cserver`
