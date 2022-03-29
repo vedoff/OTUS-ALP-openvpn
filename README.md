@@ -48,5 +48,5 @@
 Скопируем туда ключи и сертификаты: \
 cp -rp /etc/openvpn/easy-rsa/pki/{ca.crt,issued/clientserv.crt,private/clientserv.key} /etc/openvpn/client/clientserv
 Создадим конфиг `openvpn-server`
-
+[server.conf](https://github.com/vedoff/openvpn/blob/main/roles/ovpn/files/server.conf)
 
