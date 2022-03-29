@@ -3,3 +3,14 @@
 ## Подключаем файл установки пакетов на хосты
 - name: Import install-ovpn.yml
   import_tasks: install-ovpn.yml
+  tags: iovpn
+
+  ## Подключаем файл конфигурирования openvpn-server
+- name: Import configure-ovpn-server.yml
+  import_tasks: configure-ovpn-server.yml
+  tags: cserver
+
+   ## Подключаем файл конфигурирования openvpn-client
+- name: Import configure-ovpn-client.yml
+  import_tasks: configure-ovpn-client.yml
+  tags: cclient

@@ -1,0 +1,17 @@
+- name: copy file server.conf to openvpn-server
+  copy:
+    src: server.conf
+    dest: /etc/openvpn/server
+    owner: "root"
+    group: "root"
+    mode: '0644'
+  when: 
+    - ansible_hostname == "vpnserver"
+
+- name: set up forward packages across routers
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: '1'
+    state: present
+  when:
+    - ansible_hostname == "vpnserver"
