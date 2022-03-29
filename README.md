@@ -7,6 +7,8 @@
 # Выполнение:
 ### Между двумя виртуалками поднять vpn в режимах tun/tap
 Поднимаем стенд: \
-`vagrant up`
+`vagrant up && ansible-playbook play.yml`
 ### Схема стенда
 ![](https://github.com/vedoff/openvpn/blob/main/pict/Screenshot%20from%202022-03-29%2015-18-58.png)
+
+В результате будут развернуты машины согласно схеме и установленн на них openvpn, утилита easy-rsa (только на сервер), а также дополнительные утилиты.
