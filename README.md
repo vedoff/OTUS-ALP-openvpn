@@ -40,6 +40,7 @@
 ![](https://github.com/vedoff/openvpn/blob/main/pict/Screenshot%20from%202022-03-29%2017-53-24.png)
 ### Копируем полученые сертификаты в места согласно конфигу openvpn: 
 `cp -rp /etc/openvpn/easy-rsa/pki/{ca.crt,dh.pem,ta.key,crl.pem,issued,private} /etc/openvpn/server/` 
+
 ![](https://github.com/vedoff/openvpn/blob/main/pict/Screenshot%20from%202022-03-29%2016-40-03.png)
 
 ### Генерим сертификат для `clientserver openvpn` 
@@ -49,8 +50,8 @@
 `mkdir /etc/openvpn/client/clientserv` \
 Скопируем туда ключи и сертификаты: \
 cp -rp /etc/openvpn/easy-rsa/pki/{ca.crt,issued/clientserv.crt,private/clientserv.key} /etc/openvpn/client/clientserv
-Создадим конфиг `openvpn-server`
-[server.conf](https://github.com/vedoff/openvpn/blob/main/roles/ovpn/files/server.conf)
+### Создадим конфиг `openvpn-server`
+[server.conf](https://github.com/vedoff/openvpn/blob/main/roles/ovpn/files/server.conf) \
 Конфиг будет установлен на сервер путем копирования средствами `ansible` \
 И настроена пересылка пакетов между интерфейсами: \
 `net.ipv4.ip_forward=1 -> /etc/sysctl.conf` \
