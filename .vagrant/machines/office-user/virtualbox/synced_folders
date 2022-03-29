@@ -1,0 +1,1 @@
+{"rsync":{"/vagrant":{"type":"rsync","guestpath":"/vagrant","hostpath":"/VML-pool/git/Otus-VPN","disabled":false,"rsync_auto":"true","rsync_exclude":[".git/",".vagrant/",".gitignore","Vagrantfile"],"__vagrantfile":true,"owner":"vagrant","group":"vagrant"}}}

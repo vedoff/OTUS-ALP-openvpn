@@ -1,0 +1,20 @@
+# Install ovpn
+- name: install ovpn server
+  apt:
+    name:
+      - openvpn
+      - easy-rsa
+      - mc
+      - tcpdump
+    update_cache: true
+  when: ansible_hostname == "vpnserver"
+  
+  # Install ovpn client
+- name: install ovpn client
+  apt:
+    name:
+      - openvpn
+      - mc
+      - tcpdump
+    update_cache: true
+  when: ansible_hostname == "vpnclient"

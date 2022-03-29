@@ -1,0 +1,5 @@
+---
+# tasks file for ovpn
+## Подключаем файл установки пакетов на хосты
+- name: Import install-ovpn.yml
+  import_tasks: install-ovpn.yml
