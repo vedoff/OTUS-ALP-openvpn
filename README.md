@@ -7,7 +7,7 @@
 # Выполнение:
 ### Между двумя виртуалками поднять vpn в режимах tun/tap
 Поднимаем стенд: \
-`vagrant up && ansible-playbook play.yml`
+`vagrant up && ansible-playbook play.yml -t iovpn`
 ### Схема стенда
 ![](https://github.com/vedoff/openvpn/blob/main/pict/Screenshot%20from%202022-03-29%2015-18-58.png)
 
@@ -36,7 +36,22 @@
 Генерим сертификат отзыва: \
 `./easyrsa gen-crl` \
 Доступен по `/etc/easy-rsa/pki/crl.pem` \
-Копируем полученые сертификаты в места согласно конфигу openvpn
-`cp -rp /etc/openvpn/easy-rsa/pki/{ca.crt,dh.pem,ta.key,crl.pem,issued,private} /etc/openvpn/server/`
+Копируем полученые сертификаты в места согласно конфигу openvpn: \
+`cp -rp /etc/openvpn/easy-rsa/pki/{ca.crt,dh.pem,ta.key,crl.pem,issued,private} /etc/openvpn/server/` 
 
+![](https://github.com/vedoff/openvpn/blob/main/pict/Screenshot%20from%202022-03-29%2016-40-03.png)
 ### Все сертификаты появятся в папкe `/etc/openvpn/easy-rsa/pki` и ее подпапках.
+### Генерим сертификат для `clientserver openvpn` 
+Так же будет запрошен пароль от CA.key (123456): \
+`./easyrsa build-client-full clientserv nopass` \
+Создадим папку для клиента: \
+`mkdir /etc/openvpn/client/clientserv` \
+Скопируем туда ключи и сертификаты: \
+cp -rp /etc/openvpn/easy-rsa/pki/{ca.crt,issued/clientserv.crt,private/clientserv.key} /etc/openvpn/client/clientserv
+Создадим конфиг `openvpn-server`
+[server.conf](https://github.com/vedoff/openvpn/blob/main/roles/ovpn/files/server.conf)
+Конфиг будет установлен на сервер путем копирования средствами `ansible` \
+И настроена пересылка пакетов между интерфейсами: \
+`net.ipv4.ip_forward=1 -> /etc/sysctl.conf` \
+Выполняем: \
+`ansible-playbook configure-server.yml -t cserver`
