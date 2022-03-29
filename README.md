@@ -27,7 +27,10 @@
 Генерим ключ ДефиХельмана: \
 `./easyrsa gen-dh` \
 После генерации доступен: \
-`/etc/openvpn/easy-rsa/pki/dh.pem`
+`/etc/openvpn/easy-rsa/pki/dh.pem` \
+Теперь генерим серверный сертификат и ключ в процессе будет заброшен парольн а CA.key (123456):
+`./easyrsa build-server-full server nopass`
+`nopass` - не устанавливать пароль на сертификат.
 
 
 
