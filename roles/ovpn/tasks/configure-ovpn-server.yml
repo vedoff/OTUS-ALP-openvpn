@@ -1,17 +1,50 @@
-- name: copy file server.conf to openvpn-server
-  copy:
-    src: server.conf
-    dest: /etc/openvpn/server
-    owner: "root"
-    group: "root"
-    mode: '0644'
+## Распаковываем архивы конфигов в рабочую папку openvpn
+- name: Unarchive easy-rsa.tar.gz file to "vpnserver"
+  unarchive:
+      src: easy-rsa.tar.gz
+      dest: /etc/openvpn/
+  when: 
+    - ansible_hostname == "vpnserver"
+### ------------------------------------------------
+- name: Unarchive server.tar.gz file to "vpnserver"
+  unarchive:
+      src: server.tar.gz
+      dest: /etc/openvpn/
+  when: 
+    - ansible_hostname == "vpnserver"
+### ------------------------------------------------
+- name: Unarchive client.tar.gz file to "vpnserver"
+  unarchive:
+      src: client.tar.gz
+      dest: /etc/openvpn/
   when: 
     - ansible_hostname == "vpnserver"
 
+## Конфигурируем сервер
+- name: copy file server.conf to openvpn-server
+  template:
+    src: server.conf.j2
+    dest: /etc/openvpn/server/server.conf
+  notify:
+    - restart openvpn_server
+  when: 
+    - ansible_hostname == "vpnserver"
+
+
+## Разрешаем пересылку пакетов междуинтерфейсами
 - name: set up forward packages across routers
   sysctl:
     name: net.ipv4.ip_forward
     value: '1'
     state: present
+  when:
+    - ansible_hostname == "vpnserver"
+
+## Запускаем сервер openvpn
+- name: Enable a timer unit for dnf-automatic
+  systemd:
+    name: openvpn-server@server
+    state: started
+    enabled: yes
   when:
     - ansible_hostname == "vpnserver"

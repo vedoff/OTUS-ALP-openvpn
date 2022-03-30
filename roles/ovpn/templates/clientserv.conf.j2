@@ -1,8 +1,7 @@
 client
 tls-client
 pull
-#dev tun
-dev tap
+dev {{ devtun }}
 proto udp
 remote 10.10.11.1 1194
 resolv-retry infinite
@@ -14,7 +13,8 @@ persist-tun
 key-direction 1
 remote-cert-tls server
 auth-nocache
-comp-lzo
+#comp-lzo
+pull
 verb 3
 auth SHA512
 <tls-auth>

@@ -1,17 +1,38 @@
-- name: copy file clientserv.conf to openvpn-client
-  copy:
-    src: clientserv.conf
-    dest: /etc/openvpn/client
+## Создаем файл конфигурации
+- name: Change file ownership, group and permissions
+  file:
+    path: /etc/openvpn/client/clientserv.conf
     owner: "root"
     group: "root"
     mode: '0644'
   when: 
-    - ansible_hostname == "vpnclient"
+      - ansible_hostname == "vpnclient"
 
+## Конфигурируем openvpn-client
+- name: copy file clientserv.conf to openvpn-client
+  template:
+    src: clientserv.conf.j2
+    dest: /etc/openvpn/client/clientserv.conf
+  notify:
+    - restart openvpn_client
+  when: 
+      - ansible_hostname == "vpnclient"
+
+
+## Разрешаем пересылку пакетов между интерфейсами
 - name: set up forward packages across routers
   sysctl:
     name: net.ipv4.ip_forward
     value: '1'
     state: present
+  when:
+    - ansible_hostname == "vpnclient"
+
+## Запускаем openvpn-client
+- name: Enable a timer unit for dnf-automatic
+  systemd:
+    name: openvpn-client@clientserv
+    state: started
+    enabled: yes
   when:
     - ansible_hostname == "vpnclient"

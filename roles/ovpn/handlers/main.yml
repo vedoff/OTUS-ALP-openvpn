@@ -1,2 +1,11 @@
 ---
 # handlers file for ovpn
+- name: restart openvpn_server
+  systemd:
+    name: openvpn-server@server
+    state: restarted
+
+- name: restart openvpn_client
+  systemd:
+    name: openvpn-client@clientserv
+    state: restarted

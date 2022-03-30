@@ -16,7 +16,8 @@ Vagrant.configure(2) do |config|
     server.vm.hostname = "vpnserver"
     # настройки сети
     server.vm.network "private_network", ip: "10.10.11.1", adapter: 2, netmask: "255.255.255.240", virtualbox__intnet: "vpn-net"
-    server.vm.network "private_network", ip: "192.168.56.60",adapter: 3, netmask: "255.255.255.0"
+    server.vm.network "private_network", ip: "192.168.80.11", adapter: 3, netmask: "255.255.255.0", virtualbox__intnet: "office-mng"
+    server.vm.network "private_network", ip: "192.168.56.60",adapter: 4, netmask: "255.255.255.0"
     server.vm.synced_folder ".", "/vagrant",  
           type: "rsync",
           rsync_auto: "true",
@@ -46,7 +47,7 @@ Vagrant.configure(2) do |config|
 
   end
 
-# =========================================== Office ===================================================
+# =========================================== Office-a ===================================================
     config.vm.define "office-user" do |office|
     # имя виртуальной машины
     office.vm.box = 'centos/7'
@@ -65,6 +66,25 @@ Vagrant.configure(2) do |config|
           rsync_exclude: [".git/",".vagrant/",".gitignore","Vagrantfile"]
           #office.vm.provision "shell", path: "provision/prepare-office.sh"
     end
+# =========================================== Office-b ===================================================
+config.vm.define "office-mng" do |mng|
+  # имя виртуальной машины
+  mng.vm.box = 'centos/7'
+  mng.vm.box_version = '1804.02'
+  mng.vm.provider "virtualbox" do |vb|
+    vb.name = "office-mng"
+  end
+  # hostname виртуальной машины
+  mng.vm.hostname = "office-mng"
+  # настройки сети
+  mng.vm.network "private_network", ip: "192.168.80.10", adapter: 2, netmask: "255.255.255.0", virtualbox__intnet: "office-mng"
+  mng.vm.network "private_network", ip: "192.168.56.51",adapter: 3, netmask: "255.255.255.0"
+  mng.vm.synced_folder ".", "/vagrant",  
+        type: "rsync",
+        rsync_auto: "true",
+        rsync_exclude: [".git/",".vagrant/",".gitignore","Vagrantfile"]
+        #office.vm.provision "shell", path: "provision/prepare-office.sh"
+  end
   # ssh-pub add in server
     config.vm.provision "shell", inline: <<-SHELL
     cat /vagrant/provision/vagrant-key.pub >> /home/vagrant/.ssh/authorized_keys
