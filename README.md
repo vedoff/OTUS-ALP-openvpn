@@ -59,7 +59,7 @@ cp -rp /etc/openvpn/easy-rsa/pki/{ca.crt,issued/clientserv.crt,private/clientser
 
 Запуск openvpn-server в консоле (при ручном конфигурировании): \
 `systemctl enable --now openvpn-server@server`
-### Сформируем конфиг из полученых сертификатов для `openvpn-client` [clientserv.conf](https://github.com/vedoff/openvpn/blob/main/roles/ovpn/templates/server.conf.j2)
+### Сформируем конфиг из полученых сертификатов для `openvpn-client` [clientserv.conf](https://github.com/vedoff/openvpn/blob/main/roles/ovpn/templates/clientserv.conf.j2)
 Конфиг будет установлен на сервер путем копирования средствами `ansible` \
 И настроена пересылка пакетов между интерфейсами: \
 `net.ipv4.ip_forward=1 -> /etc/sysctl.conf` \
