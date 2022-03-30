@@ -50,7 +50,7 @@
 `mkdir /etc/openvpn/client/clientserv` \
 Скопируем туда ключи и сертификаты: \
 cp -rp /etc/openvpn/easy-rsa/pki/{ca.crt,issued/clientserv.crt,private/clientserv.key} /etc/openvpn/client/clientserv
-### Создадим конфиг `openvpn-server` [server.conf](https://github.com/vedoff/openvpn/blob/main/roles/ovpn/files/server.conf) 
+### Создадим конфиг `openvpn-server` [server.conf](https://github.com/vedoff/openvpn/blob/main/roles/ovpn/templates/server.conf.j2) 
 Конфиг будет установлен на сервер путем копирования средствами `ansible` \
 И настроена пересылка пакетов между интерфейсами: \
 `net.ipv4.ip_forward=1 -> /etc/sysctl.conf` \
@@ -59,7 +59,7 @@ cp -rp /etc/openvpn/easy-rsa/pki/{ca.crt,issued/clientserv.crt,private/clientser
 
 Запуск openvpn-server в консоле (при ручном конфигурировании): \
 `systemctl enable --now openvpn-server@server`
-### Сформируем конфиг из полученых сертификатов для `openvpn-client` [clientserv.conf](https://github.com/vedoff/openvpn/blob/main/roles/ovpn/files/clientserv.conf)
+### Сформируем конфиг из полученых сертификатов для `openvpn-client` [clientserv.conf](https://github.com/vedoff/openvpn/blob/main/roles/ovpn/templates/server.conf.j2)
 Конфиг будет установлен на сервер путем копирования средствами `ansible` \
 И настроена пересылка пакетов между интерфейсами: \
 `net.ipv4.ip_forward=1 -> /etc/sysctl.conf` \
