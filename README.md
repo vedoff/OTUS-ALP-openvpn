@@ -64,7 +64,7 @@ cp -rp /etc/openvpn/easy-rsa/pki/{ca.crt,issued/clientserv.crt,private/clientser
 И настроена пересылка пакетов между интерфейсами: \
 `net.ipv4.ip_forward=1 -> /etc/sysctl.conf` \
 Выполняем: \
-`ansible-playbook configure-server.yml -t cclient` \
+`ansible-playbook configure-server.yml -t cclient` 
 
 Запуск openvpn-client в консоле (при ручном конфигурировании): \
 `systemctl enable --now openvpn-client@clientserv`
