@@ -32,7 +32,7 @@
 `./easyrsa build-server-full server nopass` \
 `nopass` - не устанавливать пароль на сертификат. \
 Генерим TLS/SSL - защита от DoS атак и UDPпорт флудинга \
-`openvpn --genkey secret /etc/easy-rsa/pki/ta.key` \
+`openvpn --genkey secret /etc/openvpn/easy-rsa/pki/ta.key` \
 Генерим сертификат отзыва: \
 `./easyrsa gen-crl` \
 Доступен по `/etc/easy-rsa/pki/crl.pem` 
