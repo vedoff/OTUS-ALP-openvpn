@@ -32,7 +32,7 @@
 `./easyrsa build-server-full server nopass` \
 `nopass` - не устанавливать пароль на сертификат. \
 Генерим TLS/SSL - защита от DoS атак и UDPпорт флудинга \
-`openvpn --genkey secret /etc/easy-rsa/pki/ta.key` \
+`openvpn --genkey secret /etc/openvpn/easy-rsa/pki/ta.key` \
 Генерим сертификат отзыва: \
 `./easyrsa gen-crl` \
 Доступен по `/etc/easy-rsa/pki/crl.pem` 
@@ -50,21 +50,21 @@
 `mkdir /etc/openvpn/client/clientserv` \
 Скопируем туда ключи и сертификаты: \
 cp -rp /etc/openvpn/easy-rsa/pki/{ca.crt,issued/clientserv.crt,private/clientserv.key} /etc/openvpn/client/clientserv
-### Создадим конфиг `openvpn-server` [server.conf](https://github.com/vedoff/openvpn/blob/main/roles/ovpn/files/server.conf) 
+### Создадим конфиг `openvpn-server` [server.conf](https://github.com/vedoff/openvpn/blob/main/roles/ovpn/templates/server.conf.j2) 
 Конфиг будет установлен на сервер путем копирования средствами `ansible` \
 И настроена пересылка пакетов между интерфейсами: \
 `net.ipv4.ip_forward=1 -> /etc/sysctl.conf` \
 Выполняем: \
-`ansible-playbook configure-server.yml -t cserver` 
+`ansible-playbook play.yml -t cserver` 
 
 Запуск openvpn-server в консоле (при ручном конфигурировании): \
 `systemctl enable --now openvpn-server@server`
-### Сформируем конфиг из полученых сертификатов для `openvpn-client` [clientserv.conf](https://github.com/vedoff/openvpn/blob/main/roles/ovpn/files/clientserv.conf)
+### Сформируем конфиг из полученых сертификатов для `openvpn-client` [clientserv.conf](https://github.com/vedoff/openvpn/blob/main/roles/ovpn/templates/clientserv.conf.j2)
 Конфиг будет установлен на сервер путем копирования средствами `ansible` \
 И настроена пересылка пакетов между интерфейсами: \
 `net.ipv4.ip_forward=1 -> /etc/sysctl.conf` \
 Выполняем: \
-`ansible-playbook configure-server.yml -t cclient` 
+`ansible-playbook play.yml -t cclient` 
 
 Запуск openvpn-client в консоле (при ручном конфигурировании): \
 `systemctl enable --now openvpn-client@clientserv`
