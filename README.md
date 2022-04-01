@@ -18,12 +18,11 @@
 `cp -r /usr/share/easy-rsa /etc/openvpn` \
 Переходим по пути \
 `cd /etc/openvpn/easy-rsa/` \
-Инициализируем PKI
+Инициализируем PKI \
 `./easyrsa init-pki`\
 Создаем корневой сертификат CA, в процессе будет запрошена установка пароля для удобства вводим (123456)
 `./easyrsa build-ca` \
-После генерации сертификат CA доступен в
-`/etc/openvpn/easy-rsa/pki/ca.crt`
+После генерации сертификат CA доступен в `/etc/openvpn/easy-rsa/pki/ca.crt` \
 Генерим ключ ДефиХельмана: \
 `./easyrsa gen-dh` \
 После генерации доступен: \
