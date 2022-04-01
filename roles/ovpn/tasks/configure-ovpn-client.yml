@@ -1,10 +1,11 @@
 ## Создаем файл конфигурации
-- name: Change file ownership, group and permissions
+- name: Create file clientserv.conf
   file:
     path: /etc/openvpn/client/clientserv.conf
     owner: "root"
     group: "root"
     mode: '0644'
+    state: touch
   when: 
       - ansible_hostname == "vpnclient"
 
@@ -17,7 +18,6 @@
     - restart openvpn_client
   when: 
       - ansible_hostname == "vpnclient"
-
 
 ## Разрешаем пересылку пакетов между интерфейсами
 - name: set up forward packages across routers

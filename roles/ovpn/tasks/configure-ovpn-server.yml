@@ -41,7 +41,7 @@
     - ansible_hostname == "vpnserver"
 
 ## Запускаем сервер openvpn
-- name: Enable a timer unit for dnf-automatic
+- name: Enable service openvpn-server@server
   systemd:
     name: openvpn-server@server
     state: started

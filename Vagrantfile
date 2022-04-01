@@ -47,7 +47,7 @@ Vagrant.configure(2) do |config|
 
   end
 
-# =========================================== Office-a ===================================================
+# =========================================== Office-user ===================================================
     config.vm.define "office-user" do |office|
     # имя виртуальной машины
     office.vm.box = 'centos/7'
@@ -64,9 +64,9 @@ Vagrant.configure(2) do |config|
           type: "rsync",
           rsync_auto: "true",
           rsync_exclude: [".git/",".vagrant/",".gitignore","Vagrantfile"]
-          #office.vm.provision "shell", path: "provision/prepare-office.sh"
+          office.vm.provision "shell", path: "provision/add-default-office.sh"
     end
-# =========================================== Office-b ===================================================
+# =========================================== Office-mng ===================================================
 config.vm.define "office-mng" do |mng|
   # имя виртуальной машины
   mng.vm.box = 'centos/7'
@@ -83,7 +83,7 @@ config.vm.define "office-mng" do |mng|
         type: "rsync",
         rsync_auto: "true",
         rsync_exclude: [".git/",".vagrant/",".gitignore","Vagrantfile"]
-        #office.vm.provision "shell", path: "provision/prepare-office.sh"
+        mng.vm.provision "shell", path: "provision/add-default-mng.sh"
   end
   # ssh-pub add in server
     config.vm.provision "shell", inline: <<-SHELL
