@@ -1,20 +1,29 @@
+## Install epel-release
+- name: Install epel-relese
+  yum:
+    name: epel-release
+  when:
+    ansible_distribution == "CentOS"
+
 # Install ovpn
 - name: install ovpn server
-  apt:
+  yum:
     name:
       - openvpn
       - easy-rsa
       - mc
       - tcpdump
-    update_cache: true
+      - net-tools
+    state: latest
   when: ansible_hostname == "vpnserver"
   
   # Install ovpn client
 - name: install ovpn client
-  apt:
+  yum:
     name:
       - openvpn
       - mc
       - tcpdump
-    update_cache: true
+      - net-tools
+    state: latest
   when: ansible_hostname == "vpnclient"

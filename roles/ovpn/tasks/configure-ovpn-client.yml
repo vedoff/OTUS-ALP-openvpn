@@ -14,8 +14,8 @@
   template:
     src: clientserv.conf.j2
     dest: /etc/openvpn/client/clientserv.conf
-  notify:
-    - restart openvpn_client
+  #notify:
+  #  - restart openvpn_client
   when: 
       - ansible_hostname == "vpnclient"
 
@@ -27,6 +27,17 @@
     state: present
   when:
     - ansible_hostname == "vpnclient"
+
+   ## Создать каталог /var/log/openvpn
+- name: Create folder /var/log/openvpn
+  file:
+    path: /var/log/openvpn
+    state: directory
+    owner: root
+    group: root
+    mode: 0664
+  when: 
+    - ansible_hostname == "vpnclient" 
 
 ## Запускаем openvpn-client
 - name: Enable a timer unit for dnf-automatic

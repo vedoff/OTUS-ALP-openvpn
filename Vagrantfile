@@ -7,7 +7,7 @@ Vagrant.configure(2) do |config|
   # ========================================= VPN-Server ========================================
     config.vm.define "vpnserver" do |server|
     # имя виртуальной машины
-    server.vm.box = 'debian11/v1230.1'
+    server.vm.box = 'vedoff/centos-7-5'
     #server.vm.box_version = 'v1230.1'
     server.vm.provider "virtualbox" do |vb|
       vb.name = "vpnserver"
@@ -28,7 +28,7 @@ Vagrant.configure(2) do |config|
   # ========================================= VPN-Client =====================================
     config.vm.define "vpnclient" do |client|
     # имя виртуальной машины
-    client.vm.box = 'debian11/v1230.1'
+    client.vm.box = 'vedoff/centos-7-5'
     #client.vm.box_version = 'v1230.1' 
     client.vm.provider "virtualbox" do |vbc|
       vbc.name = "vpnclient"

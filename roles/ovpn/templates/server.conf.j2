@@ -1,32 +1,38 @@
+local 10.10.11.1 
 port 1194
 proto udp
 dev {{ devtun }}
+
+topology subnet
+
 ca ca.crt
 cert issued/server.crt
-key private/server.key  # This file should be kept secret
+key private/server.key
 dh dh.pem
-#topology subnet
 
 #tun-mtu 1500
 #mssfix 1300
 
 server 10.8.0.0 255.255.255.0
-ifconfig-pool-persist /var/log/openvpn/ipp.txt
-push "redirect-gateway def1 bypass-dhcp"
+#push "redirect-gateway def1 bypass-dhcp"
 push "dhcp-option DNS 8.8.8.8"
 push "route 192.168.80.0 255.255.255.0"
-#route 192.168.70.0 255.255.255.0 10.8.0.2
-route 192.168.70.0 255.255.255.0
-client-to-client
+route 192.168.70.0 255.255.255.0 10.8.0.2
 keepalive 10 120
-tls-auth ta.key 0 # This file is secret
-cipher AES-256-CBC
+
+#client-to-client
+#tls-auth ta.key 0
+#cipher AES-256-CBC
 #comp-lzo
+
 persist-key
 persist-tun
+
 status /var/log/openvpn/openvpn-status.log
 log-append  /var/log/openvpn/openvpn.log
-#client-config-dir /etc/openvpn/ccd
+client-config-dir /etc/openvpn/ccd
 verb 3
-explicit-exit-notify 1
-auth SHA512
+
+#ifconfig-pool-persist /var/log/openvpn/ipp.txt
+#explicit-exit-notify 1
+#auth SHA512

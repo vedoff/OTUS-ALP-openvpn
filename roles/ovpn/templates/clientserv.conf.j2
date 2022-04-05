@@ -1,48 +1,52 @@
-client
-tls-client
-pull
 dev {{ devtun }}
 proto udp
 remote 10.10.11.1 1194
 resolv-retry infinite
-nobind
+
+topology subnet
+
+client
+#tls-client
 
 #tun-mtu 1500
 #mssfix 1300
 
 #user nobody
 #group nogroup
+
 persist-key
 persist-tun
-key-direction 1
-remote-cert-tls server
-auth-nocache
-#comp-lzo
+
+#remote-cert-tls server
+#cipher AES-256-CBC
+
 verb 3
-auth SHA512
-<tls-auth>
+
+status /var/log/openvpn/openvpn-status.log
+log-append  /var/log/openvpn/openvpn.log
+
+#<tls-auth>
 #
 # 2048 bit OpenVPN static key
 #
------BEGIN OpenVPN Static key V1-----
-0719df4dd68095a8d64c4eee3d1e1ff6
-8f4b1ae2eb096dfadefadddfbbf66cca
-d124dd36600be73c0c4b28952aec022b
-91ab3ed99f76e4bc617cff22be40b9fc
-1f98a45fa47e939b1b55e42ac7585718
-4f074a2247322609ec7cc5749950f194
-3c46144a78399797c778d8ea0026fb86
-e1a2e02eaf87002d06f9762c7dad43a9
-9717664fb7a8ffc9eef2652fc7e43eba
-dd01fc64ff67136d9b7724dae455bc7f
-8108899046fda90982102c0946a74a3e
-2e2111ccb76af2fdbdfa7938e4d352ad
-f230aff22a6baa2224325abe3f4fb76e
-cee31b5981473376b05d7f7ecceb3316
-604b1b51daac5811b038bcab85de618d
-e24caecba7b8786f1f348f5fe936e041
------END OpenVPN Static key V1-----
-</tls-auth>
+#-----BEGIN OpenVPN Static key V1-----
+#0719df4dd68095a8d64c4eee3d1e1ff6
+#8f4b1ae2eb096dfadefadddfbbf66cca
+#d124dd36600be73c0c4b28952aec022b
+#91ab3ed99f76e4bc617cff22be40b9fc
+#1f98a45fa47e939b1b55e42ac7585718
+#4f074a2247322609ec7cc5749950f194
+#3c46144a78399797c778d8ea0026fb86
+#e1a2e02eaf87002d06f9762c7dad43a9
+#9717664fb7a8ffc9eef2652fc7e43eba
+#dd01fc64ff67136d9b7724dae455bc7f
+#8108899046fda90982102c0946a74a3e
+#2e2111ccb76af2fdbdfa7938e4d352ad
+#f230aff22a6baa2224325abe3f4fb76e
+#cee31b5981473376b05d7f7ecceb3316
+#e24caecba7b8786f1f348f5fe936e041
+#-----END OpenVPN Static key V1-----
+#</tls-auth>
 <ca>
 -----BEGIN CERTIFICATE-----
 MIIDSzCCAjOgAwIBAgIULET1rkI4H9NaPeqPDG35/ERKHCYwDQYJKoZIhvcNAQEL

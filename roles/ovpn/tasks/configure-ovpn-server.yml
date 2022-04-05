@@ -20,13 +20,35 @@
   when: 
     - ansible_hostname == "vpnserver"
 
+## Создать каталог ccd
+- name: Create folder ccd
+  file:
+    path: /etc/openvpn/ccd
+    state: directory
+    owner: root
+    group: root
+    mode: 0664
+  when: 
+    - ansible_hostname == "vpnserver" 
+
+    ## Создать каталог /var/log/openvpn
+- name: Create folder /var/log/openvpn
+  file:
+    path: /var/log/openvpn
+    state: directory
+    owner: root
+    group: root
+    mode: 0664
+  when: 
+    - ansible_hostname == "vpnserver" 
+
 ## Конфигурируем сервер
 - name: copy file server.conf to openvpn-server
   template:
     src: server.conf.j2
     dest: /etc/openvpn/server/server.conf
-  notify:
-    - restart openvpn_server
+  #notify:
+  #  - restart openvpn_server
   when: 
     - ansible_hostname == "vpnserver"
 
