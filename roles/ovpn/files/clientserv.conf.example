@@ -18,5 +18,5 @@ verb 3
 auth SHA512
 tls-auth ta.key 1
 ca ca.crt
-cert koromicha.crt
-key koromicha.key
+cert user1.crt
+key user1.key
