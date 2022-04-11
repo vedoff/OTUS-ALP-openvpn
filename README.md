@@ -71,4 +71,4 @@ cp -rp /etc/openvpn/easy-rsa/pki/{ca.crt,issued/clientserv.crt,private/clientser
 Конфиг так же можно сформировать другим способом, просто скопировав на клиент сервер файлы ключей и сертификатов, добавив пути в соответствующие директивы в конфиге. \
 [Пример конфига](https://github.com/vedoff/openvpn/blob/main/roles/ovpn/files/clientserv.conf.example)
 
-
+# RAS server для офиса
