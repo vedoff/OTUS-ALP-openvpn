@@ -72,7 +72,7 @@ cp -rp /etc/openvpn/easy-rsa/pki/{ca.crt,issued/clientserv.crt,private/clientser
 [Пример конфига](https://github.com/vedoff/openvpn/blob/main/roles/ovpn/files/clientserv.conf.example)
 
 # RAS server для офиса
-Конфигурация RAS server уже заложена в изночально при разыертывании. \
+Конфигурация RAS server уже заложена при разыертывании. \
 Клиенты создаются так же как и для связывания офисов. \
 Клиенту прередается файл с настройками и сертификатами. \
 Предпочтительнее испоьзовать upd tun протокол - меньше потерь при пересылке пакетов, а так же выше скорость передачи данных. \
