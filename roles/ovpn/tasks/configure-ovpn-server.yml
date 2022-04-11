@@ -42,17 +42,6 @@
   when: 
     - ansible_hostname == "vpnserver" 
 
-## Конфигурируем сервер
-- name: copy file server.conf to openvpn-server
-  template:
-    src: server.conf.j2
-    dest: /etc/openvpn/server/server.conf
-  #notify:
-  #  - restart openvpn_server
-  when: 
-    - ansible_hostname == "vpnserver"
-
-
 ## Разрешаем пересылку пакетов междуинтерфейсами
 - name: set up forward packages across routers
   sysctl:
@@ -69,4 +58,14 @@
     state: started
     enabled: yes
   when:
+    - ansible_hostname == "vpnserver"
+
+    ## Конфигурируем сервер
+- name: copy file server.conf to openvpn-server
+  template:
+    src: server.conf.j2
+    dest: /etc/openvpn/server/server.conf
+  notify:
+    - restart openvpn_server
+  when: 
     - ansible_hostname == "vpnserver"
