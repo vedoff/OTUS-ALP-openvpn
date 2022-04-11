@@ -42,7 +42,7 @@
 
 ![](https://github.com/vedoff/openvpn/blob/main/pict/Screenshot%20from%202022-03-29%2016-40-03.png)
 
-### Генерим сертификат для `clientserver openvpn` 
+### Генерим сертификат для `clientserver openvpn (подобным образом генерятся сертификаты для ras)` 
 Так же будет запрошен пароль от CA.key (123456): \
 `./easyrsa build-client-full clientserv nopass` \
 Создадим папку для клиента: \
