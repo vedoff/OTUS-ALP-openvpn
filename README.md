@@ -21,15 +21,15 @@
 #### Инициализируем PKI 
 `./easyrsa init-pki`\
 #### Создаем корневой сертификат CA, в процессе будет запрошена установка пароля для удобства вводим (123456)
-`./easyrsa build-ca` 
-После генерации сертификат CA доступен в `/etc/openvpn/easy-rsa/pki/ca.crt` \
+`./easyrsa build-ca` \
+После генерации сертификат CA доступен в `/etc/openvpn/easy-rsa/pki/ca.crt` 
 #### Генерим ключ ДефиХельмана: 
 `./easyrsa gen-dh` \
 После генерации доступен: \
-`/etc/openvpn/easy-rsa/pki/dh.pem` \
+`/etc/openvpn/easy-rsa/pki/dh.pem` 
 #### Теперь генерим серверный сертификат и ключ в процессе будет запрошен пароль на CA.key (123456): 
 `./easyrsa build-server-full server nopass` \
-`nopass` - не устанавливать пароль на сертификат. \
+`nopass` - не устанавливать пароль на сертификат. 
 #### Генерим TLS/SSL - защита от DoS атак и UDPпорт флудинга 
 `openvpn --genkey secret /etc/openvpn/easy-rsa/pki/ta.key` 
 #### Генерим сертификат отзыва: 
